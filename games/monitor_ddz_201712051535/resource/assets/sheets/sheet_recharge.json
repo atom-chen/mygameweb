@@ -1,0 +1,5 @@
+{"file":"sheet_recharge.png","frames":{
+"recharge_bg_34":{"x":0,"y":0,"w":214,"h":195,"offX":0,"offY":0,"sourceW":214,"sourceH":195},
+"recharge_bg_36":{"x":216,"y":59,"w":111,"h":38,"offX":0,"offY":0,"sourceW":111,"sourceH":38},
+"recharge_bg_38":{"x":216,"y":0,"w":108,"h":51,"offX":0,"offY":0,"sourceW":108,"sourceH":51},
+"recharge_active":{"x":326,"y":0,"w":76,"h":57,"offX":0,"offY":0,"sourceW":76,"sourceH":57}}}

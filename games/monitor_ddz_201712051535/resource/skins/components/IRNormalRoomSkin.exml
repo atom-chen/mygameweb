@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="components.IRNormalRoomSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image source="room_item_bg"/>
+	<e:Image id="imgIcon" source="icon_room_0" x="-18" y="-3"/>
+	<e:Image y="138" horizontalCenter="0.5" source="room_item_bottom"/>
+	<e:Label id="labLimit" text="条件" y="153" bold="true" size="25" width="347" x="0" textAlign="center" stroke="1" strokeColor="0x81521c"/>
+	<e:Label id="labOnlineCount" text="0人在玩" y="95" horizontalCenter="55" textColor="0x885400" bold="true" size="25"/>
+	<e:Image id="imgName" y="30" horizontalCenter="50" source="room_word_0"/>
+</e:Skin>

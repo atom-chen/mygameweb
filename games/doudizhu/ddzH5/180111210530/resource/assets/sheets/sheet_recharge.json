@@ -1,0 +1,6 @@
+{"file":"sheet_recharge.png","frames":{
+"recharge_bg_38":{"x":215,"y":34,"w":108,"h":51,"offX":0,"offY":0,"sourceW":108,"sourceH":51},
+"recharge_limit":{"x":215,"y":0,"w":246,"h":32,"offX":0,"offY":0,"sourceW":246,"sourceH":32},
+"recharge_active":{"x":325,"y":34,"w":76,"h":57,"offX":0,"offY":0,"sourceW":76,"sourceH":57},
+"recharge_bg_34":{"x":0,"y":0,"w":213,"h":195,"offX":0,"offY":0,"sourceW":213,"sourceH":195},
+"recharge_bg_36":{"x":215,"y":93,"w":111,"h":38,"offX":0,"offY":0,"sourceW":111,"sourceH":38}}}

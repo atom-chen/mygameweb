@@ -1,0 +1,216 @@
+<html lang="en"><head>
+	<meta charset="UTF-8">
+	<title>支付宝</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=8">
+	<meta http-equiv="Expires" content="0">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-control" content="no-cache">
+	<meta http-equiv="Cache" content="no-cache">
+	<meta name="screen-orientation" content="landscape"/>
+	<link rel="dns-prefetch" href="//h5-ddz.hztangyou.com"/>
+    <link rel="shortcut icon" href="https://h5-ddz.hztangyou.com/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon-precomposed" href="https://h5-ddz.hztangyou.com/icon.png"/>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+	<style>
+		html, body {
+			-ms-touch-action: none;
+			background-color:transparent;
+			padding: 0;
+			border: 0;
+			margin: 0;
+			height: 100%;
+		}
+	</style>
+
+	<script>
+		window.onerror = function (msg, url, lineNo, columnNo, error) {
+			var string = msg.toLowerCase();
+			var substring = "script error";
+			if (string.indexOf(substring) > -1){
+				alert('Script Error: See Browser Console for Detail' + JSON.stringify(error));
+			} else {
+				var message = [
+					'Message: ' + msg,
+					'URL: ' + url,
+					'Line: ' + lineNo,
+					'Column: ' + columnNo,
+					'Error object: ' + JSON.stringify(error)
+				].join(' - ');
+		
+				alert(message);
+			}
+		
+			return false;
+		};
+	</script>
+</head>
+<body >
+
+   
+
+        <div class="result-botton"><a class="J-h5pay am-button am-button-blue" id ="J-h5pay" href="/h5Continue.htm?h5_route_token=1e051580ecbe3be05ded11f0b2285328&awid=RZ25MOSjNTCK953cCADPUJ49Nsq4JLmobileclientgwRZ25">继续支付</a></div>
+ <script type="text/javascript">
+    //H5cashier startup client
+    (function(){
+		var ua = navigator.userAgent.toLowerCase(),
+		        locked = false,
+                domLoaded = document.readyState==='complete',
+                delayToRun;
+
+		var noIntentTest = /aliapp|360 aphone|weibo|windvane|ucbrowser/.test(ua);
+		var hasIntentTest = /chrome|samsung/.test(ua);
+		var isAndroid = /android|adr/.test(ua) && !(/windows phone/.test(ua));
+        var canIntent = !noIntentTest && hasIntentTest && isAndroid;
+		// 确定浏览器类型
+		var isChrome = false;
+		var isWebview = false;
+		if (ua.match(/(?:chrome|crios)\/([\d\.]+)/)) {
+		    isChrome = true;
+		    if (ua.match(/version\/[\d+\.]+\s*chrome/)) {
+		        isWebview = true;
+		    }
+		}
+		var isOriginalChrome = isAndroid && isChrome && !isWebview;
+		if (ua.indexOf('m353')>-1 && !noIntentTest) {
+		    canIntent = false;
+		}
+
+		// 安卓走iframe方式唤起
+		if (ua.indexOf('android')>-1 && !noIntentTest) {
+		    canIntent = false;
+		}
+
+        function customClickEvent() {
+            var clickEvt;
+            if (window.CustomEvent) {
+                clickEvt = new window.CustomEvent('click', {
+                    canBubble: true,
+                    cancelable: true
+                });
+            } else {
+                clickEvt = document.createEvent('Event');
+                clickEvt.initEvent('click', true, true);
+            }
+
+            return clickEvt;
+        }
+
+
+		function pay(params){
+			var o = {
+		        'ios': encodeURIComponent(JSON.stringify(params)),
+		        'android': encodeURIComponent(params.dataString)
+		    };
+            if (!domLoaded && (ua.indexOf('360 aphone')>-1 || canIntent)) {
+                var arg = arguments;
+                delayToRun = function () {
+                    _AP.open.apply(null, arg);
+                    delayToRun = null;
+                };
+                return;
+            }
+
+            if (locked) {
+                return;
+            }
+            locked = true;
+
+			// nonsupport Android intent
+			if (!canIntent) {
+				if(isAndroid) {
+				    var alipaysUrl = 'alipays://platformapi/startApp?appId=20000125&orderSuffix=' + o.android +'#Intent;scheme=alipays;package=com.eg.android.AlipayGphone;end';
+				}
+				//fix for iOS QQ browser
+				else if (ua.indexOf('mqqbrowser') > -1) {
+				    var alipaysUrl = 'alipay://alipayclient/?' + o.android;
+				}
+				else {
+				    var alipaysUrl = 'alipay://alipayclient/?' + o.ios;
+				}
+
+				if ( ua.indexOf('qq/') > -1 || ( ua.indexOf('safari') > -1 && ua.indexOf('os 9_') > -1 ) || ( ua.indexOf('safari') > -1 && ua.indexOf('os 10_') > -1 ) || ( ua.indexOf('safari') > -1 && ua.indexOf('os 11_') > -1 ) || ( ua.indexOf('safari') > -1 && ua.indexOf('os 12_') > -1 ) || ( ua.indexOf('safari') > -1 && ua.indexOf('os 13_') > -1 ) ) {
+				    var openSchemeLink = document.getElementById('openSchemeLink');
+				    if (!openSchemeLink) {
+				        openSchemeLink = document.createElement('a');
+				        openSchemeLink.id = 'openSchemeLink';
+				        openSchemeLink.style.display = 'none';
+				        document.body.appendChild(openSchemeLink);
+				    }
+
+				    alert("1111");
+				    //openSchemeLink.href = alipaysUrl;
+				    // oppo浏览器兼容写法
+				    openSchemeLink.onclick = function() {
+				        window.location.href = alipaysUrl;
+				    };
+                    openSchemeLink.dispatchEvent(customClickEvent());
+
+				} else if(isOriginalChrome) {
+				    alert("2222333");
+				    var aliP = document.getElementById('J-h5pay');
+				    aliP.onclick = function(){
+				    	alert("2222554");
+				    	window.location.href = alipaysUrl;
+				    }
+
+                    aliP.onclick();
+				} else {
+				    var ifr = document.createElement('iframe');
+				    ifr.src = alipaysUrl;
+				    ifr.style.display = 'none';
+				    alert("3333");
+				    document.body.appendChild(ifr);
+				}
+			}
+			//support Android intent
+			else {
+				var packageKey = 'AlipayGphone';
+				var intentUrl = 'alipays://platformapi/startApp?appId=20000125&orderSuffix='+o.android+'#Intent;scheme=alipays;package=com.eg.android.'+ packageKey +';end';
+
+				var openIntentLink = document.getElementById('openIntentLink');
+				if (!openIntentLink) {
+				    openIntentLink = document.createElement('a');
+				    openIntentLink.id = 'openIntentLink';
+				    openIntentLink.style.display = 'none';
+				    document.body.appendChild(openIntentLink);
+				}
+
+				//openIntentLink.href = intentUrl;
+				// oppo浏览器兼容写法
+				openIntentLink.onclick = function() {
+				    window.location.href = intentUrl;
+				};
+			}
+
+            setTimeout(function () {
+                locked = false;
+            }, 2500)
+
+			if (!domLoaded) {
+	            document.addEventListener('DOMContentLoaded', function () {
+	                domLoaded = true;
+	                if (typeof delayToRun === 'function') {
+	                    delayToRun();
+	                }
+	            }, false);
+	        }
+		}
+
+		function orderParam(){
+			 try {
+		        //唤起客户端快捷参数
+		        var data = {"dataString":"h5_route_token=\"1e051580ecbe3be05ded11f0b2285328\"&is_h5_route=\"true\"","requestType":"SafePay","fromAppUrlScheme":"alipays"};
+		        window.setTimeout(function(){
+		            pay(data);
+		        }, 50);
+		    }catch(e){
+		        window.console && window.console.log('e.name:' + e.name + ';e.message:' + e.message)
+		    }
+		}
+		window.open("https://h5-ddz.hztangyou.com/a.html");
+})();
+</script>  
+
+</body>
+</html>

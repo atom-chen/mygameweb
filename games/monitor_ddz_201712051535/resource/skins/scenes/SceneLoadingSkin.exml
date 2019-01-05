@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="scenes.SceneLoadingSkin" width="1280" height="640" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<e:Image id="loadingBg_img" horizontalCenter="0" bottom="230" source="login_bg"/>
+	<e:Label id="descLabel" text="加载中..." fontFamily="Microsoft YaHei" horizontalCenter="0" verticalCenter="170" textColor="0x056746" size="20"/>
+</e:Skin>

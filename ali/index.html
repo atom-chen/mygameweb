@@ -1,0 +1,176 @@
+﻿<html lang="en"><head>
+	<meta charset="UTF-8">
+	<title>微信授权-不成功请刷新</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=8">
+	<meta http-equiv="Expires" content="0">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-control" content="no-cache">
+	<meta http-equiv="Cache" content="no-cache">
+	<meta name="screen-orientation" content="landscape"/>
+	
+	<link rel="dns-prefetch" href="//h5-ddz.hztangyou.com"/>
+    <link rel="shortcut icon" href="https://h5-ddz.hztangyou.com/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon-precomposed" href="https://h5-ddz.hztangyou.com/icon.png"/>
+   
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+	<style>
+		html, body {
+			-ms-touch-action: none;
+			background-color:transparent;
+			padding: 0;
+			border: 0;
+			margin: 0;
+			height: 100%;
+		}
+	</style>
+
+	<script>
+		window.onerror = function (msg, url, lineNo, columnNo, error) {
+			var string = msg.toLowerCase();
+			var substring = "script error";
+			if (string.indexOf(substring) > -1){
+				alert('Script Error: See Browser Console for Detail' + JSON.stringify(error));
+			} else {
+				var message = [
+					'Message: ' + msg,
+					'URL: ' + url,
+					'Line: ' + lineNo,
+					'Column: ' + columnNo,
+					'Error object: ' + JSON.stringify(error)
+				].join(' - ');
+		
+				alert(message);
+			}
+		
+			return false;
+		};
+	</script>
+</head>
+<body >
+    <iframe id="game" padding= "0" margin = "0" border ="0" frameborder="0" scrolling="no" marginwidth="0" marginheight="0"  width="100%" height="100%" position = "absolute"></iframe>
+	<script>
+		"use strict";
+		var HOST = "https://h5-ddz.hztangyou.com/"
+		var apiHost = HOST + 'api.php?';
+		var ua = navigator.userAgent;
+
+
+		function getPlatform(){
+			var platform = 'other';
+			if(/(iPhone|iPad|iPod|iOS)/i.test(ua)){
+				platform = 'iOS';
+			}else if(/(Android)/i.test(ua)){
+				platform = 'Android';
+			}
+
+			return platform;
+		}
+
+		function getBrowser(){
+			var browser = 'other';
+			if(/(CriOS)/i.test(ua)){
+				browser = 'chrome';
+			}else if(/(MicroMessenger)/i.test(ua)){
+				browser = 'wx';
+			}else if(/(Safari)/i.test(ua)){
+				browser = 'safari';
+			}
+
+			return browser;
+		}
+
+		function xmlHttpPost(url,callback){
+			var xhr = new XMLHttpRequest();
+	 		xhr.open("post", url,true);
+	    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	 		xhr.onreadystatechange = function(){
+	 			if(xhr.readyState == 4) {
+	 				if(xhr.status == 200){
+	                	callback(JSON.parse(xhr.responseText));
+	                }else {
+	            		alert("授权失败!");
+	            	}
+	            }
+	 		}
+			xhr.send(null);
+		}
+
+		function getUrlParams() {
+			var params = {};
+			var href = window.location.href;
+			var index = href.indexOf("?");
+			if (index < 0) {
+				return params;
+			}
+			var hashes = href.substr(index + 1).split('&');
+			for (var i = 0; i < hashes.length; i++) {
+				var arr = hashes[i].split('=');
+				params[arr[0]] = arr[1];
+			}
+			return params;
+		}
+	
+		var _aList = [];
+		function getCurTime(callFunc){
+			/*var myDate = new Date();
+			_aList.push({func:callFunc,date:myDate}); 
+			*/
+		}
+	
+		function listTime(){
+			/*var _str = "";
+			var _first = null;
+			var _last = null;
+			for(var i=0;i<2;++i){
+				var _myDate = _aList[i].date;
+				var _hour = _myDate.getHours();
+				var _minute = _myDate.getMinutes();
+				var _sec = _myDate.getSeconds();
+				var _millSec = _myDate.getMilliseconds();
+				_str += _aList[i].func + "|"+ _hour + ":" + _minute +":" + _sec+ ":" + _millSec +"\n";
+				_last  = _aList[i].date;
+			}
+			if(_aList.length >0){
+				_first = _aList[0].date;
+				_str += "毫秒差:" + parseInt((_last.getTime() - _first.getTime()) / 1);
+			}
+			alert("=>" + _str );
+			document.title = _str;
+			*/
+		}
+
+		function redirectToGame(){
+			var url = apiHost + 'action=getGameByName&name=doudizhu';
+			xmlHttpPost(url,function(response){
+				if(response.code == 0){
+					var game = response.data;
+					if(window.opener){
+						window.close();
+						window.opener.location.replace(HOST + game.url);
+					}
+					else{
+						document.title = game.alias;
+						var _game = document.getElementById("game");
+						//_game.src = "http://h5.ddz.htgames.cn/games/doudizhu/web/0/index.html?"+ Math.random();
+						//getCurTime("ToGame");
+						var _time = new Date().getTime();
+						//alert("eeee" + _time);
+						var _unionid = window._myParams.unionid || 0;
+						var url =HOST + "games/doudizhu/ddzH5/180105192032/index.html?showLog=0&num=" + Math.random() + "&unionid=" + _unionid + "&ali_code=" + window._myParams.auth_code;
+						//alert("url:"+url);
+						_game.src = url;
+					}
+				}
+				else{
+					alert("发送错误,code=",response.code);
+				}
+			})
+		}
+
+		window._myParams = getUrlParams();
+		redirectToGame();
+	</script>
+</body>
+</html>

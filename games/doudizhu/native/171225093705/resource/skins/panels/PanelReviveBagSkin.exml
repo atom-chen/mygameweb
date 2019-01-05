@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="panels.PanelReviveSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" width="1280" height="640" states="noRecorder,hasRecorder" >
+	<w:Config id="15f37cb46e1"/>
+	<e:Image id="bg_img" y="74" width="770" height="460" horizontalCenter="0" source="common_alert1_bg" scale9Grid="23,58,42,16"/>
+	<e:Group id="tit_group" horizontalCenter="1" y="80">
+		<e:Image id="titBgImg1" y="0" source="common_tit_bg" horizontalCenter="0" x="30" scaleX="1" scaleY="1"/>
+		<e:Image id="titFontImg1" y="-5" horizontalCenter="1.5" x="138" scaleX="1" scaleY="1" source="revive_tit"/>
+	</e:Group>
+	<e:Image id="close_img" x="1010.67" y="95.5" source="common_close_n" anchorOffsetX="30.67" anchorOffsetY="30.5"/>
+
+	<e:Image id="revive_img" x="629" y="452" anchorOffsetX="74.5" anchorOffsetY="27.5" source="revive_money6"/>
+	<e:Image id="revive_item1" x="518" y="324" anchorOffsetX="47.5" anchorOffsetY="47" x.noRecorder="580" source="room_3"/>
+	<e:Label id="item1Num_label" text="x60" x="516" y="344" size="20" bold="true" fontFamily="Microsoft YaHei" x.noRecorder="580"/>
+	<e:Image id="revive_add1" x="700" y="324" anchorOffsetX="15" anchorOffsetY="15" source="revive_add" visible.noRecorder="false"/>
+	<e:Image id="revive_item2" x="641" y="324" anchorOffsetX="47.5" anchorOffsetY="47" x.noRecorder="704" source="room_3"/>
+	<e:Image id="reviveAdd2_img" x="627" y="308" anchorOffsetX="35" anchorOffsetY="34" source="revive_addition" x.noRecorder="690.67"/>
+	<e:Image id="revive_add2" x="576" y="324" anchorOffsetX="15" anchorOffsetY="15" source="revive_add" x.noRecorder="640"/>
+	<e:Image id="revive_item3" x="761.5" y="324" anchorOffsetX="47.5" anchorOffsetY="47" visible.noRecorder="false" source="room_2"/>
+	<e:Image id="reviveAdd3_img" x="748.75" y="308" anchorOffsetX="35" anchorOffsetY="34" source="revive_addition" visible.noRecorder="false"/>
+	<e:Label id="item2Num_label" text="x12" x="641" y="344" size="20" bold="true" fontFamily="Microsoft YaHei" x.noRecorder="704"/>
+	<e:Label id="item3Num_label" text="1天" x="761" y="344" size="20" bold="true" fontFamily="Microsoft YaHei" visible.noRecorder="false"/>
+	<e:Label id="diamoneTip_label" text="   抱歉，您的钻石少于{0}颗，无法继续游戏，您可以通过以下方式复活。" x="439" y="187" textColor="0x7f3000" size="26" width="419" height="52" fontFamily="Microsoft YaHei"/>
+</e:Skin>
